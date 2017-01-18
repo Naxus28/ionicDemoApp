@@ -36,14 +36,19 @@ angular.module('starter', ['ionic'])
        return nameMatch.length;
       }
 
-      $scope.moveItem = function(item, fromIndex, toIndex) {
+      $scope.moveArtist = function(artist, fromIndex, toIndex) {
        $scope.artists.splice(fromIndex, 1);
-       $scope.artists.splice(toIndex, 0, item);
+       $scope.artists.splice(toIndex, 0, artist);
+      }
+
+      $scope.deleteArtist = function(fromIndex) {
+        console.log(fromIndex);
+       $scope.artists.splice(fromIndex, 1);
       }
 
     })
     .error(function(err) {
-      console.warn('error getting data.json: ', err);
+      console.warn('error: ', err);
     })
 
 }])

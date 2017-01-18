@@ -47,12 +47,12 @@
       </div>
 
       <ion-content class="has-subheader">
-        <ion-list>
-          <ion-item class="item-thumbnail-left">
-            <img src="http://placehold.it/100x100" alt="Photo">
-            <h2>Name</h2>
-            <h3>Renown</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas rerum aperiam consequuntur nulla rem quidem illo fugiat ratione omnis, veritatis vero et possimus quae, odio labore laborum earum repellendus quasi.</p>
+        <ion-list ng-controller="ListController">
+          <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="artist in artists">
+            <img ng-src="./img/{{artist.shortname}}_tn.jpg" alt="{{artist.name}}">
+            <h2>{{artist.name}}</h2>
+            <h3>{{artist.reknown}}</h3>
+            <p>{{artist.bio}}</p>
           </ion-item>
         </ion-list>
       </ion-content>

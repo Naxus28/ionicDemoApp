@@ -22,3 +22,15 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.controller('ListController', ['$scope', '$http', function($scope, $http){
+  $http.get('js/data.json')
+    .success(function(data) {
+      $scope.artists = data.artists;
+      console.log(data);
+    })
+    .error(function(err) {
+      console.warn('error getting data.json: ', err);
+    })
+
+}])

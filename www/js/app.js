@@ -27,7 +27,15 @@ angular.module('starter', ['ionic'])
   $http.get('js/data.json')
     .success(function(data) {
       $scope.artists = data.artists;
-      console.log(data);
+
+      $scope.isNameInList = function(nameSearch) {
+        let nameMatch =  _.filter(data.artists, function(artist) {
+          let artistName = artist.name.toLowerCase();
+          return artistName.includes(nameSearch);
+        })
+       return nameMatch.length;
+      }
+
     })
     .error(function(err) {
       console.warn('error getting data.json: ', err);

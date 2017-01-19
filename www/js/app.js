@@ -49,6 +49,14 @@ angular.module('starter', ['ionic'])
         $scope.artists.splice(artistIndexInArray, 1);
       }
 
+      $scope.doRefresh = function() {
+        $http.get('js/data.json')
+          .success(function(data) {
+            $scope.artists = data.artists;
+            $scope.$broadcast('scroll.refreshComplete');
+          });
+      }
+
     })
     .error(function(err) {
       console.warn('error: ', err);

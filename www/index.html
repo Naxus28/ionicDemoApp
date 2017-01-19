@@ -51,8 +51,10 @@
       </div>
 
       <ion-content class="has-subheader">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
         <ion-list show-reorder="data.showReorder" show-delete="data.showDelete">
-          <ion-item class="item-thumbnail-left item-text-wrap item-icon-right"
+          <ion-item ng-class="{'star' : artist.star}"
+                    class="item-thumbnail-left item-text-wrap item-icon-right"
                     ng-repeat="artist in artists | filter:query:strict track by $index ">
             <img ng-src="./img/{{artist.shortname}}_tn.jpg" alt="{{artist.name}}">
             <h2>{{artist.name}}</h2>

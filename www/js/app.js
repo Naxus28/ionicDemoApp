@@ -23,16 +23,54 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('ListController', ['$scope', '$http', function($scope, $http){
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('tabs', {
+        url: '/tabs',
+        abstract: true,
+        templateUrl: 'templates/tabs.html'
+      })
+      .state('tabs.home', {
+        url: '/home',
+        views: {
+          'home-tab': {
+            templateUrl: 'templates/home.html'
+          }
+        }
+      })
+      .state('tabs.list', {
+        url: '/list',
+        views: {
+          'list-tab': {
+            templateUrl: 'templates/list.html',
+            controller: 'ListController'
+          }
+        }
+      })
+      .state('tabs.detail', {
+        url: '/list/:aId',
+        views: {
+          'list-tab': {
+            templateUrl: 'templates/detail.html',
+            controller: 'ListController'
+          }
+        }
+      })
+
+    $urlRouterProvider.otherwise('/tabs/home');
+}])
+
+.controller('ListController', ['$scope', '$http', '$state', function($scope, $http, $state) {
   $http.get('js/data.json')
     .success(function(data) {
       $scope.artists = data.artists;
+      $scope.whichartist = $state.params.aId;
 
       $scope.isNameInList = function(nameSearch) {
         let nameMatch =  _.filter(data.artists, function(artist) {
           let artistName = artist.name.toLowerCase();
           return artistName.includes(nameSearch);
-        })
+        });
        return nameMatch.length;
       }
 

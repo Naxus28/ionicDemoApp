@@ -2,3 +2,17 @@
 .star>.item-content {
 	background-color: #EEE8D6;
 }
+
+.splash {
+	background: url('../img/skyline.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-size: cover;
+	background-size: cover;
+}
+
+.branding {
+	width: 50%;
+	max-width: 200px;
+	text-align: center;
+	margin: 20px auto 0;
+}

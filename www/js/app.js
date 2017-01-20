@@ -52,6 +52,7 @@ angular.module('starter', ['ionic'])
     .success(function(data) {
       $scope.artists = data.artists;
       $scope.whichartist = $state.params.aId;
+      $scope.data = {showDelete: false, showReorder: false};
 
       $scope.isNameInList = function(nameSearch) {
         let nameMatch =  _.filter(data.artists, function(artist) {
@@ -80,6 +81,13 @@ angular.module('starter', ['ionic'])
             $scope.artists = data.artists;
             $scope.$broadcast('scroll.refreshComplete');
           });
+      }
+
+      $scope.getFullName = function() {
+        let artist = _.find($scope.artists, function(artist) {
+          return artist.shortname === $scope.whichartist;
+        });
+        return artist.name;
       }
 
     })

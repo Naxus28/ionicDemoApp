@@ -25,39 +25,26 @@ angular.module('starter', ['ionic'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('tabs', {
-        url: '/tabs',
+      .state('layout', {
         abstract: true,
-        templateUrl: 'templates/tabs.html'
+        templateUrl: 'templates/layout.html'
       })
-      .state('tabs.home', {
+      .state('layout.home', {
         url: '/home',
-        views: {
-          'home-tab': {
-            templateUrl: 'templates/home.html'
-          }
-        }
+        templateUrl: 'templates/home.html'
       })
-      .state('tabs.list', {
+      .state('layout.list', {
         url: '/list',
-        views: {
-          'list-tab': {
-            templateUrl: 'templates/list.html',
-            controller: 'ListController'
-          }
-        }
+        templateUrl: 'templates/list.html',
+        controller: 'ListController'
       })
-      .state('tabs.detail', {
-        url: '/list/:aId',
-        views: {
-          'list-tab': {
-            templateUrl: 'templates/detail.html',
-            controller: 'ListController'
-          }
-        }
+      .state('layout.detail', {
+        url: '/detail/:aId',
+        templateUrl: 'templates/detail.html',
+        controller: 'ListController'
       })
 
-    $urlRouterProvider.otherwise('/tabs/home');
+    $urlRouterProvider.otherwise('/home');
 }])
 
 .controller('ListController', ['$scope', '$http', '$state', function($scope, $http, $state) {

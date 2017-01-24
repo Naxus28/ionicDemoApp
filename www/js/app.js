@@ -34,17 +34,49 @@ angular.module('starter', ['ionic'])
         templateUrl: 'templates/home.html'
       })
       .state('layout.list', {
-        url: '/list',
+        url: '/artists',
         templateUrl: 'templates/list.html',
         controller: 'ListController'
       })
       .state('layout.detail', {
-        url: '/detail/:aId',
+        url: 'artists/:aId',
         templateUrl: 'templates/detail.html',
         controller: 'ListController'
       })
+      .state('layout.calendar', {
+        url: '/calendar',
+        templateUrl: 'templates/calendar.html',
+        controller: 'CalendarController'
+      })
 
     $urlRouterProvider.otherwise('/home');
+}])
+
+.controller('CalendarController', ['$scope', '$http', '$state', function($scope, $http, $state) {
+  $http.get('js/data.json')
+    .success(function(data) {
+      $scope.calendar = data.calendar;
+
+      $scope.toggleStar = function(artist) {
+        artist.star = !artist.star;
+      }
+
+      $scope.deleteEvent = function(calendarIndex, eventIndex) {
+        $scope.calendar[calendarIndex].schedule.splice(eventIndex, 1);
+      }
+
+      $scope.doRefresh = function() {
+        $http.get('js/data.json')
+          .success(function(data) {
+            $scope.calendar = data.calendar;
+            $scope.$broadcast('scroll.refreshComplete');
+          });
+      }
+
+    })
+    .error(function(err) {
+      console.warn('error: ', err);
+    })
 }])
 
 .controller('ListController', ['$scope', '$http', '$state', function($scope, $http, $state) {
@@ -52,7 +84,7 @@ angular.module('starter', ['ionic'])
     .success(function(data) {
       $scope.artists = data.artists;
       $scope.whichartist = $state.params.aId;
-      $scope.data = {showDelete: false, showReorder: false};
+      $scope.data = { showDelete: false, showReorder: false };
 
       $scope.isNameInList = function(nameSearch) {
         let nameMatch =  _.filter(data.artists, function(artist) {
@@ -68,7 +100,7 @@ angular.module('starter', ['ionic'])
       }
 
       $scope.toggleStar = function(artist) {
-        artist.star = ! artist.star;
+        artist.star = !artist.star;
       }
 
       $scope.deleteArtist = function(artistIndexInArray) {

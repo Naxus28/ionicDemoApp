@@ -8,7 +8,7 @@
 
 	<ion-content class="has-subheader">
 		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
-		<div class="day" ng-repeat="(eventIndex, event) in calendar">
+		<div class="day" ng-repeat="(eventIndex, event) in calendar | filter: query">
 			<ion-item class="item-divider-calm">
 				{{ event.weekday }}
 			</ion-item>

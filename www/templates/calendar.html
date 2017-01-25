@@ -2,20 +2,42 @@
 	<div class="bar bar-subheader item-input-inset bar-light">
 	  <label for="" class="item-input-wrapper">
 	  	<i class="icon ion-search placeholder-icon"></i>
-	    <input type="search" ng-model="query.name" placeholder="Search" />
+	    <input type="search" ng-model="query" placeholder="Search" />
 	  </label>
 	</div>
 
 	<ion-content class="has-subheader">
-
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
 		<div class="day" ng-repeat="(eventIndex, event) in calendar">
 			<ion-item class="item-divider-calm">
-				{{event.weekday}}
+				{{ event.weekday }}
 			</ion-item>
 
-			<ion-list ng-if="event.title" class="item item-text-wrap eventhighlight padding">
-				<h2>{{event.title}}</h2>
-				<p>{{event.description}}</p>
+			<div ng-if="event.title" class="item item-list item-text-wrap eventhighlight padding">
+				<h2>{{ event.title }}</h2>
+				<p>{{ event.description }}</p>
+			</div>
+
+			<ion-list>
+				<ion-item ng-repeat="(eventDetailIndex, eventDetail) in event.schedule | filter: query"
+									ng-class="{'item-avatar': eventDetail.shortname, 'star': eventDetail.star}"
+									class="item-text-wrap item-icon-right">
+					<img ng-if="eventDetail.shortname" ng-src="img/{{eventDetail.shortname}}_tn.jpg" alt="{{ eventDetail.name }} Photo">
+					<h2>{{ eventDetail.time }}</h2>
+					<h3>{{ eventDetail.title }}</h3>
+					<p>{{ eventDetail.artist ? ' with ' + eventDetail.artist : '' }}</p>
+					<p>{{ eventDetail.description }}</p>
+					<button class="button button-clear icon ion-star button-assertive"
+									ng-if="eventDetail.star"
+									ng-click="toggleStar(eventDetail)">
+					</button>
+					<ion-option-button class="button-calm" ng-click="toggleStar(eventDetail)">
+						<i class="icon ion-star"></i>
+					</ion-option-button>
+					<ion-option-button class="button-assertive" ng-click="deleteEvent(eventIndex, eventDetailIndex)">
+						<i class="icon ion-trash-a"></i>
+					</ion-option-button>
+				</ion-item>
 			</ion-list>
 
 		</div>

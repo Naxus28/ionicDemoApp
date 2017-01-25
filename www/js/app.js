@@ -57,8 +57,8 @@ angular.module('starter', ['ionic'])
     .success(function(data) {
       $scope.calendar = data.calendar;
 
-      $scope.toggleStar = function(artist) {
-        artist.star = !artist.star;
+      $scope.toggleStar = function(eventDetail) {
+        eventDetail.star = !eventDetail.star;
       }
 
       $scope.deleteEvent = function(calendarIndex, eventIndex) {

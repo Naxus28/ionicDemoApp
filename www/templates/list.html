@@ -19,9 +19,9 @@
     <ion-list show-reorder="data.showReorder" show-delete="data.showDelete">
       <ion-item ng-class="{'star' : artist.star}"
                 class="item-thumbnail-left item-text-wrap item-icon-right"
-                href="#artists/{{artist.shortname}}"
+                ng-href="#/artists/{{artist.shortname}}"
                 ng-repeat="artist in artists | filter:query:strict track by $index">
-        <img ng-src="../img/{{artist.shortname}}_tn.jpg" alt="{{artist.name}}">
+        <img ng-src="img/{{artist.shortname}}_tn.jpg" alt="{{artist.name}}">
         <h2>{{artist.name}}</h2>
         <h3>{{artist.reknown}}</h3>
         <p>{{artist.bio | limitTo: 100}} {{artist.bio.length > 100 ? '&hellip;' : ''}}</p>

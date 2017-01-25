@@ -39,7 +39,7 @@ angular.module('starter', ['ionic'])
         controller: 'ListController'
       })
       .state('layout.detail', {
-        url: 'artists/:aId',
+        url: '/artists/:aId',
         templateUrl: 'templates/detail.html',
         controller: 'ListController'
       })

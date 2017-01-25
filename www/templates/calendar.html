@@ -6,7 +6,7 @@
 	  </label>
 	</div>
 
-	<ion-content class="has-subheader">
+	<ion-content class="has-subheader has-footer">
 		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
 		<div class="day" ng-repeat="(eventIndex, event) in calendar | filter: query">
 			<ion-item class="item-divider-calm">
@@ -22,7 +22,7 @@
 				<ion-item ng-repeat="(eventDetailIndex, eventDetail) in event.schedule | filter: query"
 									ng-class="{'item-avatar': eventDetail.shortname, 'star': eventDetail.star}"
 									class="item-text-wrap item-icon-right">
-					<img ng-if="eventDetail.shortname" ng-src="img/{{eventDetail.shortname}}_tn.jpg" alt="{{ eventDetail.name }} Photo">
+					<img ng-if="eventDetail.shortname" ng-src="../img/{{eventDetail.shortname}}_tn.jpg" alt="{{ eventDetail.name }} Photo">
 					<h2>{{ eventDetail.time }}</h2>
 					<h3>{{ eventDetail.title }}</h3>
 					<p>{{ eventDetail.artist ? ' with ' + eventDetail.artist : '' }}</p>
